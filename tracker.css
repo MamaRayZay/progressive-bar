@@ -1,0 +1,173 @@
+/* tracker.css */
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.progress-tracker {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 40px 0;
+  counter-reset: step;
+}
+
+.progress-tracker li {
+  position: relative;
+  flex-grow: 1;
+  width: 20%; /* fallback for browsers that do not support flex-grow */
+  text-align: center;
+  cursor: pointer;
+}
+
+.progress-tracker li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border: 2px solid #ddd; /* Light grey border */
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: white;
+  position: relative;
+  z-index: 2; /* Raise above the line */
+}
+
+.progress-tracker li:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #ddd;
+  top: 15px;
+  left: -50%;
+  z-index: 1;
+}
+
+/* The first item doesn't need a line on the left */
+.progress-tracker li:first-child:after {
+  content: none;
+}
+
+/* The active item will be highlighted */
+.progress-tracker li.active:before {
+  background-color: #4CAF50; /* Green background */
+  border-color: #4CAF50; /* Green border */
+  box-shadow: 0 0 0 5px rgba(76,175,80,0.5); /* Green glow */
+  color: white; /* White text */
+}
+
+/* Change the line color for active and completed states */
+.progress-tracker li.active ~ li:after,
+.progress-tracker li.completed ~ li:after {
+  background-color: #ddd; /* Light grey line for default state */
+}
+
+/* Completed steps get a checkmark */
+.progress-tracker li.completed:before {
+  content: '✓';
+  color: white;
+  background-color: #4CAF50; /* Green background */
+  border-color: #4CAF50; /* Green border */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .progress-tracker li:before {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+  }
+
+  .progress-tracker li:after {
+    top: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .progress-tracker {
+    display: block;
+  }
+
+  .progress-tracker li {
+    display: inline-block;
+    vertical-align: top;
+    width: auto;
+    flex-grow: 0;
+  }
+
+  .progress-tracker li:after {
+    content: none;
+  }
+}
+
+.form-section {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-section h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.5em;
+}
+
+.form-row {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.form-row label {
+  flex: 1;
+  margin-right: 10px;
+  color: #666;
+}
+
+.form-row input {
+  flex: 2;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-row label {
+    margin-bottom: 5px;
+    margin-right: 0;
+  }
+
+  .form-row input {
+    flex: none;
+    width: 100%;
+  }
+}
+.submit-button {
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #367c39; /* Darker green on hover */
+}
+
+/* Adjusting the layout for the submit button */
+.form-row {
+  justify-content: flex-end;
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Progress Tracker</title>
+<link rel="stylesheet" href="tracker.css">
+</head>
+<body>
+
+<ul class="progress-tracker">
+  <li class="step" data-step="1" onclick="showForm(1)"></li>
+  <li class="step" data-step="2" onclick="showForm(2)"></li>
+  <li class="step" data-step="3" onclick="showForm(3)"></li>
+  <li class="step" data-step="4" onclick="showForm(4)"></li>
+</ul>
+
+<section class="form-section" id="form-1">
+  <h2>1. Hello, nice to meet you</h2>
+  <form>
+    <div class="form-row">
+      <label for="name-1">Your Name:</label>
+      <input type="text" id="name-1" name="name" required>
+    </div>
+    <div class="form-row">
+      <label for="email-1">Your Email:</label>
+      <input type="email" id="email-1" name="email" required>
+    </div>
+    <div class="form-row">
+      <label for="phone-1">Your Contact Phone Number:</label>
+      <input type="tel" id="phone-1" name="phone" required>
+    </div>
+    <div class="form-row">
+      <label for="company-1">Your Company/Organisation:</label>
+      <input type="text" id="company-1" name="company">
+    </div>
+    <div class="form-row">
+      <button type="button" class="submit-button" onclick="showForm(2)">Continue</button>
+    </div>
+  </form>
+</section>
+
+<section class="form-section" id="form-2" style="display: none;">
+  <h2>2. Your location</h2>
+  <form>
+    <div class="form-row">
+      <label for="country-2">Country:</label>
+      <input type="text" id="country-2" name="country" required>
+    </div>
+    <div class="form-row">
+      <label for="province-2">Province:</label>
+      <input type="text" id="province-2" name="province" required>
+    </div>
+    <div class="form-row">
+      <label for="postal-code-2">Postal Code:</label>
+      <input type="text" id="postal-code-2" name="postal_code" required>
+    </div>
+    <div class="form-row">
+      <button type="button" class="submit-button" onclick="showForm(3)">Continue</button>
+    </div>
+  </form>
+</section>
+
+<section class="form-section" id="form-3" style="display: none;">
+  <h2>3. Job Details</h2>
+  <form>
+    <div class="form-row">
+      <label for="job-title-3">Job Title:</label>
+      <input type="text" id="job-title-3" name="job_title" required>
+    </div>
+    <div class="form-row">
+      <label for="department-3">Department:</label>
+      <input type="text" id="department-3" name="department" required>
+    </div>
+    <div class="form-row">
+      <label for="pri-number-3">PRI Number:</label>
+      <input type="text" id="pri-number-3" name="pri_number" required>
+    </div>
+    <div class="form-row">
+      <button type="button" class="submit-button" onclick="showForm(4)">Continue</button>
+    </div>
+  </form>
+</section>
+
+<section class="form-section" id="form-4" style="display: none;">
+  <h2>4. Thanks for requesting for work ID Card</h2>
+  <div class="form-row">
+    <button type="button" class="submit-button" onclick="finishForm()">Finish</button>
+  </div>
+</section>
+
+
+<script>
+// JavaScript to make the progress tracker interactive
+function updateProgress(stepNumber) {
+  // Get all the steps
+  const steps = document.querySelectorAll('.progress-tracker li');
+  
+  // Update classes for each step
+  steps.forEach((step, index) => {
+    if (index < stepNumber) {
+      step.className = 'completed';
+    } else if (index === stepNumber) {
+      step.className = 'active';
+    } else {
+      step.className = '';
+    }
+  });
+}
+// This script could be used to handle form submissions, validations, etc.
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  
+  // Perform form validation or submission here
+  
+  alert('Form submitted!'); // Placeholder action
+});
+
+  function showForm(step) {
+    // Hide all forms
+    for (let i = 1; i <= 4; i++) {
+      document.getElementById('form-' + i).style.display = 'none';
+    }
+    
+    // Show the current form
+    document.getElementById('form-' + step).style.display = 'block';
+    
+    // Update progress tracker
+    updateProgress(step);
+  }
+  
+  function finishForm() {
+    // Logic to handle the final submission
+    alert('Form is finished. Implement the submission logic here.');
+  }
+  
+  function updateProgress(step) {
+    // Reset all steps to inactive
+    document.querySelectorAll('.progress-tracker li').forEach(function(li) {
+      li.classList.remove('active');
+    });
+  
+    // Set the current step to active
+    document.querySelector('.progress-tracker li[data-step="' + step + '"]').classList.add('active');
+  }
+  </script>
+</body>
+</html>
