@@ -1,0 +1,1 @@
+The Progressive Bar is a simple, effective way to visually indicate progress. Designed to be easy to integrate and customizable, it's perfect for tracking loading states, task completions, or any progress metrics.
